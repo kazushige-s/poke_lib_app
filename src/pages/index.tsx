@@ -31,10 +31,9 @@ export default function Home() {
   }, []);
 
   //loadPokemon関数を作成。引数にはすべてのポケモンデータを渡す
-  const loadPokemon = (data: [data]) => {
-    
-    //Promise.allを使って、すべてのポケモンデータを取得
-    const _pokemonData = Promise.all(
+  const loadPokemon = async (data: [data]) => {
+    //Promise.allを使って、すべてのポケモンデータを取得。promise.allは、すべての非同期処理が終わったら、thenメソッドを実行する
+    const _pokemonData = await Promise.all(
       //map関数を使って、各ポケモンの詳細データを取得
       data.map((pokemon) => {
         //変数pokemonRecordに、各ポケモンの詳細データを格納
