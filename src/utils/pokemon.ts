@@ -10,3 +10,5 @@ export const getAllPokemon = (url: string) => {
       .then((data) => resolve(data));
   });
 };
+
+export const getPokemon = () => {};
