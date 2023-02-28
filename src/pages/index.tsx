@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "src/components/Card/Card";
+import Nabvar from "src/components/Navbar/Nabvar";
 import { getAllPokemon, getPokemon } from "src/utils/pokemon";
 
 export type pokemonType = {
@@ -64,20 +65,23 @@ export default function Home() {
     setPokemonData(_pokemonData);
   };
 
-  console.log(pokemonData);
+  // console.log(pokemonData);
   return (
-    <div className="bg-sky-50 py-5 ">
-      <div className="container mx-auto">
-        {loading ? (
-          <div>loading...</div>
-        ) : (
-          <ul className="grid grid-cols-3 gap-5">
-            {pokemonData.map((pokemon: pokemonType, i: number) => {
-              return <Card key={i} pokemon={pokemon} />;
-            })}
-          </ul>
-        )}
+    <>
+      <Nabvar />
+      <div className="bg-sky-50 py-5 ">
+        <div className="container mx-auto">
+          {loading ? (
+            <div>loading...</div>
+          ) : (
+            <ul className="grid grid-cols-3 gap-5">
+              {pokemonData.map((pokemon: pokemonType, i: number) => {
+                return <Card key={i} pokemon={pokemon} />;
+              })}
+            </ul>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
