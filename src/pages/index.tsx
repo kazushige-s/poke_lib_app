@@ -1,16 +1,8 @@
-import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 import Card from "src/components/Card/Card";
 import { getAllPokemon, getPokemon } from "src/utils/pokemon";
 
-const inter = Inter({ subsets: ["latin"] });
-
-type data = {
-  name: string;
-  url: string;
-};
-
-type pokemon = {
+export type pokemonType = {
   name: string;
   url: string;
   sprites: {
@@ -19,7 +11,9 @@ type pokemon = {
   types: [
     {
       type: {
-        name: string;
+        type: {
+          name: string;
+        };
       };
     }
   ];
@@ -55,7 +49,7 @@ export default function Home() {
   }, []);
 
   //loadPokemon関数を作成。引数にはすべてのポケモンデータを渡す
-  const loadPokemon = async (data: [data]) => {
+  const loadPokemon = async (data: [pokemonType]) => {
     //Promise.allを使って、すべてのポケモンデータを取得。promise.allは、すべての非同期処理が終わったら、thenメソッドを実行する
     //anyを使っているので、型をつけたい！！
     const _pokemonData: any = await Promise.all(
@@ -70,7 +64,7 @@ export default function Home() {
     setPokemonData(_pokemonData);
   };
 
-  // console.log(pokemonData);
+  console.log(pokemonData);
   return (
     <div className="bg-sky-50 py-5 ">
       <div className="container mx-auto">
@@ -78,7 +72,7 @@ export default function Home() {
           <div>loading...</div>
         ) : (
           <ul className="grid grid-cols-3 gap-5">
-            {pokemonData.map((pokemon: pokemon, i: number) => {
+            {pokemonData.map((pokemon: pokemonType, i: number) => {
               return <Card key={i} pokemon={pokemon} />;
             })}
           </ul>
