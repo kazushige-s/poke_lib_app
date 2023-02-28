@@ -1,22 +1,29 @@
 import React from "react";
 
-
 const Card = ({ pokemon }) => {
   console.log(pokemon);
   return (
-    <div className="">
-      <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-      <h3>なまえ:{pokemon.name}</h3>
-      <h4>タイプ</h4>
-      {pokemon.types.map((type: string, i: number) => {
-        return <p key={i}>{type.type.name}</p>;
-      })}
-      <div>
-        <p>おおきさ:{pokemon.height * 10} cm</p>
-        <p>おもさ:{pokemon.weight / 10} kg</p>
-        <p>アビリティ:{pokemon.abilities[0].ability.name}</p>
+    <li className="w-full rounded-2xl px-4 py-4 shadow-lg shadow-gray-300 bg-white">
+      <img
+        src={pokemon.sprites.front_default}
+        alt={pokemon.name}
+        className="mx-auto"
+      />
+      <h3 className="mb-3 text-lg font-bold">なまえ:{pokemon.name}</h3>
+      <div className="flex">
+        <h4 className="flex gap-3">タイプ：</h4>
+        <ul className="flex gap-3">
+          {pokemon.types.map((type: string, i: number) => {
+            return <li key={i}>{type.type.name}</li>;
+          })}
+        </ul>
       </div>
-    </div>
+      <div>
+        <p>おおきさ：{pokemon.height * 10} cm</p>
+        <p>おもさ：{pokemon.weight / 10} kg</p>
+        <p>アビリティ：{pokemon.abilities[0].ability.name}</p>
+      </div>
+    </li>
   );
 };
 
