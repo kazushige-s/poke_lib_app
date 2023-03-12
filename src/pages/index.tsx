@@ -15,10 +15,12 @@ export default function Home() {
   useEffect(() => {
     const fetchPokemonData = async () => {
       //すべてのポケモンデータを取得
+      //getAllpokemonにpropsとして、initialURLを渡す
+      //awaitを使って、データを取得するまで待つ
       const res: any = await getAllPokemon(initialURL);
       //各ポケモンの詳細データを取得
       loadPokemon(res.results);
-      console.log(res);
+      // console.log(res);
 
       setNextUrl(res.next);
       setPrevUrl(res.previous);
@@ -31,7 +33,6 @@ export default function Home() {
   //loadPokemon関数を作成。引数にはすべてのポケモンデータを渡す
   const loadPokemon = async (data: [pokemonType]) => {
     //Promise.allを使って、すべてのポケモンデータを取得。promise.allは、すべての非同期処理が終わったら、thenメソッドを実行する
-    //anyを使っているので、型をつけたい！！
     const _pokemonData: any = await Promise.all(
       //map関数を使って、各ポケモンの詳細データを取得
       data.map((pokemon) => {
@@ -44,10 +45,10 @@ export default function Home() {
     setPokemonData(_pokemonData);
   };
 
+  //前へボタンを押した時の処理
   const handlePrevPage = async () => {
     if (!prevUrl) return;
     setLoading(true);
-    //anyを使っているので、型をつけたい！！
     const data: any = await getAllPokemon(prevUrl);
     await loadPokemon(data.results);
     setNextUrl(data.next);
@@ -55,11 +56,10 @@ export default function Home() {
     setLoading(false);
   };
 
+  //次へボタンを押した時の処理
   const handleNextPage = async () => {
     setLoading(true);
-    //anyを使っているので、型をつけたい！！
     const data: any = await getAllPokemon(nextUrl);
-    // console.log(data);
     await loadPokemon(data.results);
     setNextUrl(data.next);
     setPrevUrl(data.previous);
@@ -75,6 +75,7 @@ export default function Home() {
       <div className="bg-sky-50 py-5 ">
         <div className="container mx-auto">
           {loading ? (
+            // ローダーを表示
             <div className="flex justify-center">
               <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
             </div>
@@ -86,7 +87,9 @@ export default function Home() {
             </ul>
           )}
         </div>
-        <div className="my-5 flex justify-center gap-10 text-lg font-bold">
+
+        {/* ボタンを表示 */}
+        <div className="sticky bottom-1 my-5 flex justify-center gap-10 text-lg font-bold">
           <button
             className="rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-400"
             onClick={handlePrevPage}
