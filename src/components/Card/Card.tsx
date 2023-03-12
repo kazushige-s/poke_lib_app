@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { pokemonType } from "src/pages";
 
 const Card:FC<any> = ({ pokemon }) => {
   return (
