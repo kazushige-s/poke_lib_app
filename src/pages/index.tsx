@@ -1,33 +1,8 @@
 import { useEffect, useState } from "react";
 import Card from "src/components/Card/Card";
 import Nabvar from "src/components/Navbar/Nabvar";
+import { pokemonType } from "src/Types/PokemoType";
 import { getAllPokemon, getPokemon } from "src/utils/pokemon";
-
-export type pokemonType = {
-  name: string;
-  url: string;
-  sprites: {
-    front_default: string;
-  };
-  types: [
-    {
-      type: {
-        type: {
-          name: string;
-        };
-      };
-    }
-  ];
-  height: number;
-  weight: number;
-  abilities: [
-    {
-      ability: {
-        name: string;
-      };
-    }
-  ];
-};
 
 export default function Home() {
   const initialURL = "https://pokeapi.co/api/v2/pokemon";
