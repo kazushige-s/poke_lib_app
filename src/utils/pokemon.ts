@@ -1,6 +1,7 @@
 type url = string;
 
 //関数getAllPokemonを定義
+//propsでurlを受け取る
 export const getAllPokemon = (url: url) => {
   //Promiseオブジェクトを返す
   return new Promise((resolve, reject) => {
