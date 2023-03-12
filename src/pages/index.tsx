@@ -104,7 +104,7 @@ export default function Home() {
               <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
             </div>
           ) : (
-            <ul className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <ul className="mx-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
               {pokemonData.map((pokemon: pokemonType, i: number) => {
                 return <Card key={i} pokemon={pokemon} />;
               })}
